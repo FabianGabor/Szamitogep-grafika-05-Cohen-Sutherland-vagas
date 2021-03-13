@@ -37,7 +37,7 @@ void draw() {
         y2 = table.getRow(0).getInt("y");
     }
 
-    int i;
+    int i = 0;
     for (i = 0; i < table.getRowCount()-1; i++) {
         x1 = table.getRow(i).getInt("x");
         y1 = table.getRow(i).getInt("y");
@@ -50,13 +50,16 @@ void draw() {
         else
             drawLine(x1, y1, x2, y2);
     }
-    if (dinamikus && table.getRowCount() > 0) {
-        x1 = mouseX;
-        y1 = mouseY;
-        if (vag)
-            CohenSutherlandSzakaszvago(x1, y1, x2, y2);
-        else
-            drawLine(x1, y1, x2, y2);
+    
+    if (dinamikus & i>0) {
+        if (vag) {
+            CohenSutherlandSzakaszvago(mouseX, mouseY, x2, y2);
+            CohenSutherlandSzakaszvago(mouseX, mouseY, table.getRow(0).getInt("x"), table.getRow(0).getInt("y"));
+        }
+        else {
+            drawLine(mouseX, mouseY, x2, y2);
+            drawLine(mouseX, mouseY, table.getRow(0).getInt("x"), table.getRow(0).getInt("y"));
+        }
     } //<>//
 }
 
